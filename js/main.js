@@ -38,7 +38,7 @@ function winOrLose(playerOne, playerTwo) {
 		document.querySelector('h2').innerText = `Player Two Wins!!`
 	} else {
 		document.querySelector('h2').innerText = `THIS IS WAAAAARRR!!`
-		document.querySelector('h1').innerText = `THIS IS WAAAAARRR!!`
+		document.querySelector('h1').innerText = `HEAD TO HEAD!!`
 		war();
 	}
 }
@@ -62,8 +62,13 @@ async function war() {
     let playerOneFightHand = await populateHand()
     let playerTwoFightHand = await populateHand()
 
-    console.log(playerOneFightHand);
-    console.log(playerTwoFightHand);
+    playerOneFightHand.forEach(img => {
+        document.querySelector(".room-A").append(img)
+    });
+
+    playerTwoFightHand.forEach(img => {
+        document.querySelector(".room-B").append(img)
+    });
 }
 
 async function populateHand() {
@@ -81,6 +86,7 @@ async function populateHand() {
         }
 
         return imgArr;
+
 	    // fetch(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=4`)
 	    // 		    .then(res => res.json())
 	    // 		    .then(jsonData => {
