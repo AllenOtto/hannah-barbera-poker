@@ -14,21 +14,21 @@ function getDeckId() {
 		});
 }
 
-function getDeck() {
-	fetch(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=2`)
-	    .then(res => res.json())
-		.then(jsonData => {
-			document.querySelector('#img-1').src = jsonData.cards[0].image
-			document.querySelector('#img-2').src = jsonData.cards[1].image
-			resultsForPlayerOne = convert(jsonData.cards[0].value)
-			resultsForPlayerTwo = convert(jsonData.cards[1].value)
-			if(jsonData) {
-				setTimeout(winOrLose(resultsForPlayerOne, resultsForPlayerTwo), 5000);
-			}
-		})
-		.catch(err => {
-			console.log(err);
-		});
+async function getDeck() {
+    try {
+	    const res = await fetch(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=2`);
+	    const jsonData = await res.json();
+	
+        document.querySelector('#img-1').src = jsonData.cards[0].image
+	    document.querySelector('#img-2').src = jsonData.cards[1].image
+	    resultsForPlayerOne = convert(jsonData.cards[0].value)
+	    resultsForPlayerTwo = convert(jsonData.cards[1].value)
+	    if(jsonData) {
+		    winOrLose(resultsForPlayerOne, resultsForPlayerTwo);
+	    }
+    } catch(err) {
+        console.error(err);
+    }
 }
 
 function winOrLose(playerOne, playerTwo) {
@@ -66,23 +66,38 @@ function war() {
     // console.log(playerTwoFightHand);
 }
 
-function populateHand() {
-	
-	fetch(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=4`)
-			    .then(res => res.json())
-			    .then(jsonData => {
-			    	for(let i = 0; i < jsonData.cards.length; i++) {
-						const warCardImg = document.createElement("img")
-						const breakTag = document.createElement("br")
-						warCardImg.src = jsonData.cards[i].image
+async function populateHand() {
+    try {
+	    const res = await fetch(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=4`);
+        const jsonData = await res.json();
+        for(let i = 0; i < jsonData.cards.length; i++) {
+            const warCardImg = document.createElement("img")
+            // const breakTag = document.createElement("br")
+            warCardImg.src = jsonData.cards[i].image
+
+            console.log(warCardImg)
+            console.log(i)
+        }
+
+
+	    // fetch(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=4`)
+	    // 		    .then(res => res.json())
+	    // 		    .then(jsonData => {
+	    // 		    	for(let i = 0; i < jsonData.cards.length; i++) {
+	    // 					const warCardImg = document.createElement("img")
+	    // 					const breakTag = document.createElement("br")
+	    // 					warCardImg.src = jsonData.cards[i]
 						
-						console.log(warCardImg)
-			    		console.log(i)
-			    	}
-			    })
-			    .catch(err => {
-			    	console.log("Error: " + err);
-			    });
+	    // 					console.log(warCardImg)
+	    // 		    		console.log(i)
+	    // 		    	}
+	    // 		    })
+	    // 		    .catch(err => {
+	    // 		    	console.log("Error: " + err);
+	    // 		    });
+    } catch (err) {
+        console.error(err);
+    }
 
 }
 
