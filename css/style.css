@@ -4,7 +4,7 @@ body {
 /*	max-width: 500px;*/
 	padding: 20px;
 	text-align: center;
-    margin: 0 0 0 50px;
+    margin: 0 auto;
 	background-color: maroon;
 	animation: all .5s ease;
     border: 3px solid white;
@@ -44,3 +44,18 @@ h2 {
 	color: lightblue;
 }
 
+.war-room > div {
+	min-width: 350px;
+}
+
+.war-room > div > img {
+	width: 24%;
+}
+
+.room-A {
+	background-color: lightblue;
+}
+
+.room-B {
+	background-color: lightgreen;
+}

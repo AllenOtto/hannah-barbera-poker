@@ -58,16 +58,18 @@ function convert(value) {
 	}
 }
 
-function war() {
-    let playerOneFightHand = populateHand()
-    let playerTwoFightHand = populateHand()
+async function war() {
+    let playerOneFightHand = await populateHand()
+    let playerTwoFightHand = await populateHand()
 
-    // console.log(playerOneFightHand);
-    // console.log(playerTwoFightHand);
+    console.log(playerOneFightHand);
+    console.log(playerTwoFightHand);
 }
 
 async function populateHand() {
     try {
+        let imgArr = []
+
 	    const res = await fetch(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=4`);
         const jsonData = await res.json();
         for(let i = 0; i < jsonData.cards.length; i++) {
@@ -75,11 +77,10 @@ async function populateHand() {
             // const breakTag = document.createElement("br")
             warCardImg.src = jsonData.cards[i].image
 
-            console.log(warCardImg)
-            console.log(i)
+            imgArr.push(warCardImg)
         }
 
-
+        return imgArr;
 	    // fetch(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=4`)
 	    // 		    .then(res => res.json())
 	    // 		    .then(jsonData => {
