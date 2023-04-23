@@ -2,16 +2,17 @@ let deckId = ""
 
 document.querySelector('button').addEventListener('click', getDeckId)
 
-function getDeckId() {
-	fetch("https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1")
-	    .then(res => res.json())
-		.then(jsonData => {
-			deckId = jsonData.deck_id;
-			getDeck();
-		})
-		.catch(err => {
-			console.log("Error: " + err);
-		});
+async function getDeckId() {
+	try {
+        const res = await fetch("https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1")
+	    const jsonData =  await res.json()
+		
+		deckId = jsonData.deck_id;
+		await getDeck();
+
+    } catch (err) {
+        console.error(err)
+    }
 }
 
 async function getDeck() {

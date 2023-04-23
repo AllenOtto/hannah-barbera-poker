@@ -46,7 +46,7 @@ h2 {
 
 .war-room > div {
 	min-width: 350px;
-	border: 5px solid black;
+	/* border: 5px solid black; */
 }
 
 .war-room > div > img {
@@ -55,8 +55,10 @@ h2 {
 
 .room-A {
 	background-color: lightblue;
+	padding: 4px 0 4px 0;
 }
 
 .room-B {
 	background-color: lightgreen;
+	padding: 4px 0 4px 0;
 }
